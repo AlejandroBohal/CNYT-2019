@@ -7,6 +7,10 @@ package edu.eci.cnyt.libreriacomplejos;
 
 import edu.eci.cnyt.libreriacomplejos.entities.Complejo;
 import edu.eci.cnyt.libreriacomplejos.entities.ComplejoPolar;
+import edu.eci.cnyt.libreriacomplejos.entities.MatrizCompleja;
+import edu.eci.cnyt.libreriacomplejos.entities.VectorComplejo;
+import edu.eci.cnyt.libreriacomplejos.exceptions.LibreriaComplejosException;
+import java.util.ArrayList;
 import org.junit.Assert;
 
 import org.junit.Test;
@@ -78,5 +82,71 @@ public class ComplejosTest {
         ComplejoPolar complejoPrueba = complejo1.cartesianaAPolar();
         Assert.assertTrue(complejoPrueba.equals(new ComplejoPolar(6.063406633,0.601268065)));
     }
+    @Test
+    public void deberiaSumarVectores() throws LibreriaComplejosException{
+        ArrayList<Complejo> vector1 = new ArrayList<>();
+        vector1.add(new Complejo(0.5,2));
+        vector1.add(new Complejo(0.3,2.2));
+        ArrayList<Complejo> vector2 = new ArrayList<>();
+        vector2.add(new Complejo(0.4,2));
+        vector2.add(new Complejo(0.5,2.2));
+        VectorComplejo vectorResultado = new VectorComplejo(vector1);
+        VectorComplejo vectorASumar = new VectorComplejo(vector2);
+        vectorResultado.sumar(vectorASumar);
+        System.out.println(vectorResultado);
+    }
+    @Test
+    public void deberiaRestarVectores(){
+        ArrayList<Complejo> vector1 = new ArrayList<>();
+        vector1.add(new Complejo(0.5,2));
+        vector1.add(new Complejo(0.3,2.2));
+        ArrayList<Complejo> vector2 = new ArrayList<>();
+        vector2.add(new Complejo(0.4,2));
+        vector2.add(new Complejo(0.5,2.2));
+        VectorComplejo vectorResultado = new VectorComplejo(vector1);
+        VectorComplejo vectorARestar = new VectorComplejo(vector2);
+        vectorResultado.restar(vectorARestar);
+        System.out.println(vectorResultado);
+    }
+    @Test
+    public void deberiaSacarInversoVector(){
+        ArrayList<Complejo> vector1 = new ArrayList<>();
+        vector1.add(new Complejo(0.5,2));
+        vector1.add(new Complejo(0.3,2.2));
+        vector1.add(new Complejo(0.4,2));
+        vector1.add(new Complejo(0.5,2.2));
+        VectorComplejo vectorResultado = new VectorComplejo(vector1);
+        vectorResultado.inversa();
+        System.out.println(vectorResultado);
+    }
+    @Test
+    public void deberiaSacarInversoMatriz(){
+        ArrayList<Complejo> vector1 = new ArrayList<>();
+        vector1.add(new Complejo(0.1,1));
+        vector1.add(new Complejo(0.2,2.2));
+        vector1.add(new Complejo(0.3,3));
+        vector1.add(new Complejo(0.4,4.2));
+        ArrayList<Complejo> vector2 = new ArrayList<>();
+        vector2.add(new Complejo(0.5,2.5));
+        vector2.add(new Complejo(0.6,2.6));
+        vector2.add(new Complejo(0.7,2.0));
+        vector2.add(new Complejo(0.8,2.2));
+        ArrayList<Complejo> vector3 = new ArrayList<>();
+        vector3.add(new Complejo(0.9,1.2));
+        vector3.add(new Complejo(1.0,4.2));
+        vector3.add(new Complejo(1.1,2.2));
+        vector3.add(new Complejo(1.2,3.2));
+        ArrayList<Complejo> vector4 = new ArrayList<>();
+        vector4.add(new Complejo(1.3,2.1));
+        vector4.add(new Complejo(1.4,2.2));
+        vector4.add(new Complejo(1.5,9.2));
+        vector4.add(new Complejo(1.6,7.2));
+        ArrayList<VectorComplejo> matriz = new ArrayList<>();
+        matriz.add(new VectorComplejo(vector1)); matriz.add(new VectorComplejo(vector2));
+        matriz.add(new VectorComplejo(vector3)); matriz.add(new VectorComplejo(vector4));
+        MatrizCompleja matrizCompleja = new MatrizCompleja(matriz);
+        System.out.println(matrizCompleja.inversa(matrizCompleja));
+    }
+    
     
 }

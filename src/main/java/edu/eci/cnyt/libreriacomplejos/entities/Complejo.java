@@ -54,6 +54,11 @@ public class Complejo {
         this.parteImaginaria = -1.0*this.parteImaginaria;
         return this;
     }
+    public Complejo negativo(){
+        this.parteImaginaria = -1.0*this.parteImaginaria;
+        this.parteReal = -1.0*this.parteReal;
+        return this;
+    }
     
     public ComplejoPolar cartesianaAPolar(){
         ComplejoPolar respuesta = new ComplejoPolar(0,0);
@@ -91,6 +96,7 @@ public class Complejo {
             return false;
         }
     }
+    
     
     
 }
