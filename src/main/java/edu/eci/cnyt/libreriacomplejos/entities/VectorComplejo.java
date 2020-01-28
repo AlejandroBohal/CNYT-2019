@@ -54,9 +54,13 @@ public class VectorComplejo {
     public void setVector(List<Complejo> vector) {
         this.vector = vector;
     }
-    private int size(){
+    public void add(Complejo c){
+        this.vector.add(c);
+    }
+    public int size(){
         return vector.size();
     }
+    
     @Override
     public String toString() {
         return "VectorComplejo{" + "vector=" + vector + '}';
