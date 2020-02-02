@@ -16,6 +16,10 @@ public class ComplejoPolar {
         this.r = r;
         this.thetha = thetha;
     }
+    public ComplejoPolar(){
+        this.r = 0.0;
+        this.thetha = 0.0;
+    }
     
 
     public double getR() {

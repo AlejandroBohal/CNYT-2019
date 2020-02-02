@@ -14,7 +14,10 @@ public class Complejo {
     private double parteImaginaria;
     
     
-    
+    public Complejo(){
+        this.parteReal = 0.0;
+        this.parteImaginaria = 0.0;
+    }
     public Complejo(double parteReal,double parteImaginaria){
         this.parteReal = parteReal;
         this.parteImaginaria = parteImaginaria;
@@ -37,6 +40,12 @@ public class Complejo {
         this.parteReal = parteRealO*complejo.parteReal - parteImaginariaO*complejo.parteImaginaria;
         this.parteImaginaria = parteRealO*complejo.parteImaginaria+parteImaginariaO*complejo.parteReal;
         return this;
+    }
+    public static Complejo multiplicar(Complejo complejo1,Complejo complejo2){
+        Complejo resultado = new Complejo();
+        resultado.parteReal = complejo1.parteReal*complejo2.parteReal - complejo1.parteImaginaria*complejo2.parteImaginaria;
+        resultado.parteImaginaria = complejo1.parteReal*complejo2.parteImaginaria+complejo1.parteImaginaria*complejo2.parteReal;
+        return resultado;
     }
     public Complejo dividir(Complejo complejo){
         double parteRealO = this.parteReal;
@@ -82,10 +91,13 @@ public class Complejo {
     public void setParteImaginaria(double parteImaginaria) {
         this.parteImaginaria = parteImaginaria;
     }
-
+    public void set(Complejo c){
+        this.parteImaginaria = c.parteImaginaria;
+        this.parteReal = c.parteReal;
+    }
     @Override
     public String toString() {
-        return "Complejo{" + "parteReal=" + parteReal + ", parteImaginaria=" + parteImaginaria + '}';
+        return "(" + parteReal + "," + parteImaginaria + ')';
     }
     
     public boolean equals(Complejo complejo){
@@ -95,6 +107,9 @@ public class Complejo {
         }else{
             return false;
         }
+    }
+    public double fase(){
+        return Math.atan2(parteImaginaria, parteReal);
     }
     
     
