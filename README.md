@@ -30,6 +30,8 @@ La libreria de complejos es una herramienta muy útil para la operación entre n
 - Revisar si es Hermitian
 - Producto tensor.
 
+     
+      
 
 ### ¿Cómo usar?
 
