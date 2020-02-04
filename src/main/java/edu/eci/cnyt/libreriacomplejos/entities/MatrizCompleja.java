@@ -15,6 +15,10 @@ import java.util.List;
  */
 public class MatrizCompleja {
     private List<VectorComplejo> matriz;
+    public static MatrizCompleja H = new MatrizCompleja(new double[][][] {{{1/Math.sqrt(2),0},{1/Math.sqrt(2),0}},
+                                                                          {{1/Math.sqrt(2),0},{-1/Math.sqrt(2),0}}});
+    public static MatrizCompleja X = new MatrizCompleja(new double[][][] {{{0,0},{1,0}},{{1,0},{0,0}}});
+    
     
     public MatrizCompleja(int cantidadFilas, int cantidadColumnas){
         this.matriz = new ArrayList();
@@ -139,8 +143,21 @@ public class MatrizCompleja {
                 }
             }
             return matrizObjetivo;
-        }
+        }  
+    }
+    public MatrizCompleja productoTensor(MatrizCompleja matriz) throws LibreriaComplejosException{
         
+        int m = this.size(), mPrima = this.get(0).size();
+        int n = matriz.size(), nPrima = matriz.get(0).size();
+        MatrizCompleja tensor = new MatrizCompleja(m*n,mPrima*nPrima);       
+        for (int j=0;j<tensor.size();j++){
+            for (int k=0;k<tensor.get(0).size();k++){
+                Complejo aux = this.get(j/n).get(k/m);
+                Complejo aux2 = matriz.get(j%n).get(k%m);
+                tensor.get(j).get(k).set(Complejo.multiplicar(aux,aux2));
+            }
+        }
+        return tensor;
     }
     public void add(VectorComplejo v){
         matriz.add(v);
