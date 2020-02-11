@@ -30,6 +30,27 @@ La libreria de complejos es una herramienta muy útil para la operación entre n
 - Revisar si es Hermitian
 - Producto tensor.
 
+## ¿Cómo utilizar los espacios vectoriales complejos?
+
+Entre todas las funcionalidades de la libreria podemos generar espacios vectoriales complejos y evidenciar toda la funcionalidad de esta.
+
+     //Ejemplo de creación de matrices compleja y producto tensor
+     double matriz1[][][] = {{{3,0}},{{4,0}},{{7,0}}};
+     double matriz2[][][] = {{{-1,0}},{{2,0}}};
+     MatrizCompleja matrizCompleja1 = new MatrizCompleja(matriz1);
+     MatrizCompleja matrizCompleja2 = new MatrizCompleja(matriz2);
+     MatrizCompleja resultado = matrizCompleja1.productoTensor(matrizCompleja2)
+     System.out.println(resultado)
+     /*
+     Resultado
+     [[(-3.0,0.0)]
+     , [(6.0,0.0)]
+     , [(-4.0,0.0)]
+     , [(8.0,0.0)]
+     , [(-7.0,0.0)]
+     , [(14.0,0.0)]
+     ]
+     */
      
       
 
