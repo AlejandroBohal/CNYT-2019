@@ -150,7 +150,7 @@ public class MatrizCompleja {
         int filas1= this.size(),columnas1 = this.get(0).size(),filas2 = matriz.size(),columnas2 = matriz.get(0).size();
         int filasTotal = (filas1*filas2), columnasTotal = (columnas1*columnas2);
         MatrizCompleja tensor = new MatrizCompleja(filasTotal,columnasTotal);
-        System.out.println("hola");
+        
         for (int i=0; i<filasTotal; i++){
             for(int j=0; j<columnasTotal;j++){
                 System.out.println(i/filas2 + ' ' + j/columnas2);

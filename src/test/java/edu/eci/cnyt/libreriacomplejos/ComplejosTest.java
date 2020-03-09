@@ -283,10 +283,20 @@ public class ComplejosTest {
         MatrizCompleja matrizCompleja2 = new MatrizCompleja(matriz2);
         
         System.out.println(matrizCompleja1.productoTensor(matrizCompleja2));
-        
-        
+   
     }
-    
+    @Test
+    public void experimento() throws LibreriaComplejosException{
+        MatrizCompleja matriz1 = MatrizCompleja.H;
+        MatrizCompleja matriz2 = MatrizCompleja.H;
+        MatrizCompleja matriz3 = MatrizCompleja.H;
+        MatrizCompleja x = MatrizCompleja.X;
+        MatrizCompleja tensor1 = matriz1.productoTensor(matriz2);
+        MatrizCompleja tensor2 = matriz3.productoTensor(x);
+        MatrizCompleja zero = new MatrizCompleja (new double[][][] {{{1,0}},{{0,0}},{{0,0}},{{0,0}}});
+        MatrizCompleja resultado = tensor2.multiplicacion(tensor1).multiplicacion(zero);
+        System.out.println(resultado);
+    }
     
     
     
