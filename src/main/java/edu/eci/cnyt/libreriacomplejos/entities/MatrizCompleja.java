@@ -147,16 +147,21 @@ public class MatrizCompleja {
     }
     public MatrizCompleja productoTensor(MatrizCompleja matriz) throws LibreriaComplejosException{
         
-        int m = this.size(), mPrima = this.get(0).size();
-        int n = matriz.size(), nPrima = matriz.get(0).size();
-        MatrizCompleja tensor = new MatrizCompleja(m*n,mPrima*nPrima);       
-        for (int j=0;j<tensor.size();j++){
-            for (int k=0;k<tensor.get(0).size();k++){
-                Complejo aux = this.get(j/n).get(k/m);
-                Complejo aux2 = matriz.get(j%n).get(k%m);
-                tensor.get(j).get(k).set(Complejo.multiplicar(aux,aux2));
+        int filas1= this.size(),columnas1 = this.get(0).size(),filas2 = matriz.size(),columnas2 = matriz.get(0).size();
+        int filasTotal = (filas1*filas2), columnasTotal = (columnas1*columnas2);
+        MatrizCompleja tensor = new MatrizCompleja(filasTotal,columnasTotal);
+        System.out.println("hola");
+        for (int i=0; i<filasTotal; i++){
+            for(int j=0; j<columnasTotal;j++){
+                System.out.println(i/filas2 + ' ' + j/columnas2);
+                Complejo aux = this.getMatriz().get(i/filas2).get(j/columnas2);
+                
+                tensor.getMatriz().get(i).get(j).set(
+                        this.getMatriz().get(i/filas2).get(j/columnas2).multiplicar
+                        (matriz.getMatriz().get(i%filas2).get(j%columnas2)));
             }
         }
+        
         return tensor;
     }
     public void add(VectorComplejo v){

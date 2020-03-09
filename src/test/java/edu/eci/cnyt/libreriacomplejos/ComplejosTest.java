@@ -276,28 +276,17 @@ public class ComplejosTest {
     }
     @Test
     public void deberiaSacarTensor() throws LibreriaComplejosException{
-        double matriz1[][][] = {{{3,0}},{{4,0}},{{7,0}}};
-        double matriz2[][][] = {{{-1,0}},{{2,0}}};
-        double resultado[][][] = {{{-3,0}},{{6,0}},{{-4,0}},{{8,0}},{{-7,0}},{{14,0}}};
+
+        double matriz1[][][] = {{{1.0,0.0},{2.3,0.2},{1.2,0.2}},{{1.5,0.5},{2.3,2.2},{1.4,1.0}},{{1.5,2.5},{2.2,3.2},{1.1,2.3}}};
+        double matriz2[][][] = {{{1.0,0.3},{1.3,2.2}},{{1.4,2.1},{2.5,0.6}}};
         MatrizCompleja matrizCompleja1 = new MatrizCompleja(matriz1);
         MatrizCompleja matrizCompleja2 = new MatrizCompleja(matriz2);
-        MatrizCompleja resultadoM = new MatrizCompleja(resultado);
-        Assert.assertTrue(resultadoM.equals(matrizCompleja1.productoTensor(matrizCompleja2)));
+        
+        System.out.println(matrizCompleja1.productoTensor(matrizCompleja2));
         
         
     }
-    @Test
-    public void experimento() throws LibreriaComplejosException{
-        MatrizCompleja matriz1 = MatrizCompleja.H;
-        MatrizCompleja matriz2 = MatrizCompleja.H;
-        MatrizCompleja matriz3 = MatrizCompleja.H;
-        MatrizCompleja x = MatrizCompleja.X;
-        MatrizCompleja tensor1 = matriz1.productoTensor(matriz2);
-        MatrizCompleja tensor2 = matriz3.productoTensor(x);
-        MatrizCompleja zero = new MatrizCompleja (new double[][][] {{{1,0}},{{0,0}},{{0,0}},{{0,0}}});
-        MatrizCompleja resultado = tensor2.multiplicacion(tensor1).multiplicacion(zero);
-        System.out.println(resultado);
-    }
+    
     
     
     
