@@ -311,7 +311,7 @@ public class ComplejosTest {
                               {{0,-1}}};
         MatrizCompleja ketc = new MatrizCompleja(ket);
         
-        Assert.assertTrue(ketc.probabilidad(7) == 0.10869565217391307);
+        Assert.assertTrue(ketc.probabilidad(7) == 0.10869565217391307 );
         
     }
     
