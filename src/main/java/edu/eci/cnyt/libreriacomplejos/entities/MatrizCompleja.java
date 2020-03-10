@@ -26,6 +26,20 @@ public class MatrizCompleja {
           matriz.add(new VectorComplejo(cantidadColumnas));
         }
     }
+    public MatrizCompleja(double[][] vector){
+        
+        MatrizCompleja matrizC = new MatrizCompleja(new ArrayList());
+        for (double[] vector1 : vector) {
+            VectorComplejo vectorAnadir = new VectorComplejo(new ArrayList());
+            for (double vector11 : vector1) {
+                Complejo complejoAnadir = new Complejo(vector11, 0.0);
+                vectorAnadir.add(complejoAnadir);
+            }
+            matrizC.add(vectorAnadir);
+        }
+        this.matriz = matrizC.getMatriz();
+    
+    }
     public MatrizCompleja(List<VectorComplejo> matriz){
         this.matriz = matriz;
     }
@@ -153,7 +167,7 @@ public class MatrizCompleja {
         
         for (int i=0; i<filasTotal; i++){
             for(int j=0; j<columnasTotal;j++){
-                System.out.println(i/filas2 + ' ' + j/columnas2);
+                
                 Complejo aux = this.getMatriz().get(i/filas2).get(j/columnas2);
                 
                 tensor.getMatriz().get(i).get(j).set(
@@ -169,6 +183,24 @@ public class MatrizCompleja {
     }
     public VectorComplejo get(int i){
         return matriz.get(i);
+    }
+    public double probabilidad(int posicion) throws LibreriaComplejosException{
+        MatrizCompleja vectorket = new MatrizCompleja(this.size(),this.get(0).size());
+        vectorket.setMatriz(this.getMatriz());
+        if(this.get(0).size() > 1){
+            throw new LibreriaComplejosException(LibreriaComplejosException.VECTOR_KET);
+        }else{
+            
+            double moduloPosicionI = Math.pow(vectorket.get(posicion).get(0).getParteImaginaria(), 2);
+            double moduloPosicionR = Math.pow(vectorket.get(posicion).get(0).getParteReal(), 2);
+            double moduloPosicion = moduloPosicionI + moduloPosicionR;
+            double sumatoriaModulos = 0.0;
+            for (int i=0; i<vectorket.size();i++){
+                sumatoriaModulos += Math.pow(vectorket.get(i).get(0).getParteImaginaria(),2);
+                sumatoriaModulos += Math.pow(vectorket.get(i).get(0).getParteReal(),2);
+            }
+            return Math.pow(Math.sqrt(moduloPosicion)/Math.sqrt(sumatoriaModulos),2);
+        }
     }
     
     public List<VectorComplejo> getMatriz() {
@@ -199,7 +231,6 @@ public class MatrizCompleja {
     }
     @Override
     public String toString() {
-        
         return "MatrizCompleja"+"\n"+ matriz;
     }
     

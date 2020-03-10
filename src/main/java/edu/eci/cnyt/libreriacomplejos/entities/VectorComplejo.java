@@ -88,7 +88,7 @@ public class VectorComplejo {
     public void setVector(List<Complejo> vector) {
         this.vector = vector;
     }
-
+    
     public void add(Complejo c) {
         this.vector.add(c);
     }

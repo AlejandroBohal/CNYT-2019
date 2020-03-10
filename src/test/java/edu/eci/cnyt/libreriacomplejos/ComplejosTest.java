@@ -297,6 +297,44 @@ public class ComplejosTest {
         MatrizCompleja resultado = tensor2.multiplicacion(tensor1).multiplicacion(zero);
         System.out.println(resultado);
     }
+    @Test
+    public void deberiaSacarProbabilidadKet() throws LibreriaComplejosException{
+        double [][][] ket = {{{2,1}},
+                              {{-1,2}},
+                              {{0,1}},
+                              {{1,0}},
+                              {{3,-1}},
+                              {{2,0}},
+                              {{0,-2}},
+                              {{-2,1}},
+                              {{1,-3}},
+                              {{0,-1}}};
+        MatrizCompleja ketc = new MatrizCompleja(ket);
+        
+        Assert.assertTrue(ketc.probabilidad(7) == 0.10869565217391307);
+        
+    }
+    
+    @Test
+    public void valorEsperado() throws LibreriaComplejosException{
+        double[][][] alpha = {{{2,0},{1,1}},{{1,-1},{3,0}}};
+        double[][][] psi = {{{(1.0/Math.sqrt(2)),0}},{{0,(1.0/Math.sqrt(2))}}};
+        double[][][] identidad = {{{1,0},{0,0}},{{0,0},{1,0}}};
+        MatrizCompleja alphac = new MatrizCompleja(alpha);
+        MatrizCompleja psic = new MatrizCompleja(psi);
+        MatrizCompleja identidadc = new MatrizCompleja(identidad);
+        MatrizCompleja producto2 = new MatrizCompleja(psic.size(),psic.get(0).size());
+        producto2.setMatriz(psic.getMatriz());
+        MatrizCompleja producto1 = alphac.multiplicacion(psic);
+        Complejo valorEsperado = producto1.productoInterno(producto2);
+        MatrizCompleja parte2  = identidadc.multiplicacionEscalar(valorEsperado);
+        
+        MatrizCompleja delta = alphac.restar(parte2);
+        MatrizCompleja delta2 = delta.multiplicacion(delta);
+        MatrizCompleja op1 = delta2.multiplicacion(psic);
+        System.out.println(op1.productoInterno(psic));
+    }
+    
     
     
     
