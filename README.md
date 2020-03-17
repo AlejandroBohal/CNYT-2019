@@ -60,7 +60,8 @@ para verificar el correcto funcionamiento de las librerias es recomendable ejecu
       
       mvntest:surefire
 Las pruebas implementadas reflejan las funcionalidades de la libreria, entre estas pruebas tenemos algunos retos de programación propuestos en el libro Quantum Computing for Computer Science.
-![]([https://raw.githubusercontent.com/AlejandroBohal/CNYT-2020/master/fotosPruebas/pruebas.png](https://raw.githubusercontent.com/AlejandroBohal/CNYT-2020/master/fotosPruebas/pruebas.png))
+![](https://raw.githubusercontent.com/AlejandroBohal/CNYT-2020/master/fotosPruebas/pruebas.png)
+
 También se hizo uso de la libreria para crear un simulador cuántico que cuenta con bastantes funcionalidades, para más información ir a:
 https://github.com/AlejandroBohal/SimulacionCuantica
 ## Formación de espacios complejos.
