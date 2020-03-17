@@ -279,10 +279,17 @@ public class ComplejosTest {
 
         double matriz1[][][] = {{{1.0,0.0},{2.3,0.2},{1.2,0.2}},{{1.5,0.5},{2.3,2.2},{1.4,1.0}},{{1.5,2.5},{2.2,3.2},{1.1,2.3}}};
         double matriz2[][][] = {{{1.0,0.3},{1.3,2.2}},{{1.4,2.1},{2.5,0.6}}};
+        double resultado[][][] = {{{1.0,0.3}, {0.64,2.5900000000000003}, {2.2399999999999998,0.8899999999999999}, {0.954,6.085}, {1.14,0.56}, {0.24999999999999978,3.236}}
+        , {{-4.543000000000001,4.970000000000001}, {-14.339500000000001,9.699200000000001}, {-11.442900000000002,10.522400000000001}, {-34.92069000000001,19.440260000000002}, {-6.445600000000001,5.0554}, {-19.14724,8.771139999999999}}
+        , {{1.35,0.95}, {-0.33499999999999974,4.205}, {1.6399999999999997,2.89}, {-4.226000000000001,7.365}, {1.0999999999999999,1.42}, {-1.6940000000000002,4.266}}
+        , {{-9.2995,5.1835}, {-26.35885,7.379050000000002}, {-21.382900000000003,1.4363999999999972}, {-54.31909000000001,-9.238740000000007}, {-11.330200000000001,2.414999999999999}, {-29.774500000000003,-0.760620000000003}}
+        , {{0.75,2.95}, {-5.515000000000001,5.485}, {1.2400000000000002,3.8600000000000003}, {-6.880000000000001,7.746000000000001}, {0.41000000000000014,2.63}, {-5.253,4.321000000000001}}
+        , {{-19.2395,-3.9025000000000016}, {-45.75724999999999,-21.299950000000003}, {-25.898600000000002,-3.6036}, {-62.58434,-24.548160000000003}, {-16.4283,-4.9818999999999996}, {-38.081610000000005,-22.311729999999997}}
+        };
         MatrizCompleja matrizCompleja1 = new MatrizCompleja(matriz1);
         MatrizCompleja matrizCompleja2 = new MatrizCompleja(matriz2);
-        
-        System.out.println(matrizCompleja1.productoTensor(matrizCompleja2));
+        MatrizCompleja res = new MatrizCompleja(resultado);
+        Assert.assertTrue(res.equals(matrizCompleja1.productoTensor(matrizCompleja2)));
    
     }
     @Test
@@ -311,25 +318,181 @@ public class ComplejosTest {
                               {{0,-1}}};
         MatrizCompleja ketc = new MatrizCompleja(ket);
         
+        Assert.assertTrue(ketc.probabilidad(0) == 0.10869565217391307);
+        Assert.assertTrue(ketc.probabilidad(1) == 0.10869565217391307);
+        Assert.assertTrue(ketc.probabilidad(2) == 0.021739130434782608);
+        Assert.assertTrue(ketc.probabilidad(3) == 0.021739130434782608);
+        Assert.assertTrue(ketc.probabilidad(4) == 0.2173913043478261);
         Assert.assertTrue(ketc.probabilidad(7) == 0.10869565217391307 );
+    }
+    @Test
+    public void deberiaSacarProbabilidadKet2() throws LibreriaComplejosException{
+        double [][][] ket = {{{0,1}},
+                              {{1,2}},
+                              {{2,1}},
+                              {{3,-5}},
+                              {{4,1}},
+                              {{5,0}},
+                              {{6,-2}},
+                              {{-2,6}},
+                              {{1,7}},
+                              {{0,8}}};
+        MatrizCompleja ketc = new MatrizCompleja(ket);
+        Assert.assertTrue(ketc.probabilidad(0) == 0.0035587188612099642);
+        Assert.assertTrue(ketc.probabilidad(1) == 0.017793594306049824);
+        Assert.assertTrue(ketc.probabilidad(2) == 0.017793594306049824);
+        Assert.assertTrue(ketc.probabilidad(3) == 0.12099644128113878);
+        Assert.assertTrue(ketc.probabilidad(4) == 0.060498220640569395); 
+    }
+    @Test
+    public void deberiaCalcularVectorProbabilidades() throws LibreriaComplejosException{
+        double [][][] ket = {{{0,1}},
+                              {{1,2}},
+                              {{2,1}},
+                              {{3,-5}},
+                              {{4,1}},
+                              {{5,0}},
+                              {{6,-2}},
+                              {{-2,6}},
+                              {{1,7}},
+                              {{0,8}}};
+        double [][][] probabilidades = {{{0.0035587188612099642,0.0}},
+                                        {{0.017793594306049824,0.0}},
+                                        {{0.017793594306049824,0.0}},
+                                        {{0.12099644128113878,0.0}},
+                                        {{0.060498220640569395,0.0}},
+                                        {{0.08896797153024912,0.0}},
+                                        {{0.1423487544483986,0.0}},
+                                        {{0.1423487544483986,0.0}},
+                                        {{0.1779359430604982,0.0}},
+                                        {{0.2277580071174377,0.0}}};
         
+        MatrizCompleja ketc = new MatrizCompleja(ket);
+        MatrizCompleja probabilidadesC = new MatrizCompleja(probabilidades);
+        
+        Assert.assertTrue(probabilidadesC.equals(ketc.genVectorProbabilidad()));
+    }
+    @Test
+    public void deberiaCalcularAmplitudTransicion() throws LibreriaComplejosException{
+        double [][][] psi = {{{2,1}},
+                              {{-1,2}},
+                              {{0,1}},
+                              {{1,0}},
+                              {{3,-1}},
+                              {{2,0}},
+                              {{0,-2}},
+                              {{-2,1}},
+                              {{1,-3}},
+                              {{0,-1}}};
+       double [][][] phi = {{{-1,-4}},
+                              {{2,-3}},
+                              {{-7,6}},
+                              {{-1,1}},
+                              {{-5,-3}},
+                              {{5,0}},
+                              {{5,8}},
+                              {{4,-4}},
+                              {{8,-7}},
+                              {{2,-7}}};
+       double [][][] res = {{{-3.0,-19.0}}};
+       MatrizCompleja psiC = new MatrizCompleja(psi);
+       MatrizCompleja phiC = new MatrizCompleja(phi);
+       MatrizCompleja amplitud = new MatrizCompleja(res);
+       Assert.assertTrue(psiC.amplitudTransicion(phiC).equals(amplitud));
+      
+    }
+    @Test 
+    public void noDeberiaCalcularProbabilidadTransicion(){
+        double [][][] ket = {{{2,1}},
+                              {{-1,2}},
+                              {{0,1}},
+                              {{1,0}},
+                              {{3,-1}},
+                              {{2,0}},
+                              {{0,-2}},
+                              {{-2,1}},
+                              {{1,-3}},
+                              {{0,-1}}};
+        double [][][] noKet = {{{2,0},{1,0}},{{1,0},{2,0}}};
+        MatrizCompleja esKet = new MatrizCompleja(ket);
+        MatrizCompleja noEsKet = new MatrizCompleja(noKet);
+        try{
+          esKet.probabilidadTransicion(esKet);
+        }catch(LibreriaComplejosException k){
+          Assert.assertTrue("La probabilidad solo está disponible para vectores ket".equals(k.getMessage()));
+        }
+    }
+    @Test 
+    public void deberiaCalcularProbabilidadTransicion() throws LibreriaComplejosException{
+        double [][][] ket1 = {{{2,1}},
+                              {{-1,2}},
+                              {{0,1}},
+                              {{1,0}},
+                              {{3,-1}},
+                              {{2,0}},
+                              {{0,-2}},
+                              {{-2,1}},
+                              {{1,-3}},
+                              {{0,-1}}};
+        double [][][] ket2 = {{{-1,-4}},
+                              {{2,-3}},
+                              {{-7,6}},
+                              {{-1,1}},
+                              {{-5,-3}},
+                              {{5,0}},
+                              {{5,8}},
+                              {{4,-4}},
+                              {{8,-7}},
+                              {{2,-7}}};
+        MatrizCompleja ket1C = new MatrizCompleja(ket1);
+        MatrizCompleja ket2C = new MatrizCompleja(ket2);
+        Assert.assertTrue(ket1C.probabilidadTransicion(ket2C) == 369.99999999999994);
+    }
+    @Test
+    public void deberiaCalcularMedia() throws LibreriaComplejosException{
+      double[][][] omega = {{{2,0},{1,1}},{{1,-1},{3,0}}};
+      double[][][] psi = {{{(1.0/Math.sqrt(2)),0}},{{0,(1.0/Math.sqrt(2))}}};
+      MatrizCompleja omegac = new MatrizCompleja(omega);
+      MatrizCompleja psic = new MatrizCompleja(psi);
+      Complejo media = omegac.media(psic);
+      Assert.assertTrue(media.getParteReal() == 1.4999999999999996);
+    }
+    @Test
+    public void deberiaCalcularDelta() throws LibreriaComplejosException{
+      double[][][] omega = {{{2,0},{1,1}},{{1,-1},{3,0}}};
+      double[][][] psi = {{{(1.0/Math.sqrt(2)),0}},{{0,(1.0/Math.sqrt(2))}}};
+      double[][][] deltaD = {{{0.5000000000000004,0.0},{1.0,1.0}},
+                              {{1.0,-1.0},{1.5000000000000004,0.0}}};
+      MatrizCompleja omegac = new MatrizCompleja(omega);
+      MatrizCompleja psic = new MatrizCompleja(psi);
+      MatrizCompleja delta = new MatrizCompleja(deltaD);
+      Assert.assertTrue(omegac.delta(psic).equals(delta));
+      
+    }
+    @Test
+    public void deberiaCalcularVarianza() throws LibreriaComplejosException{
+      double[][][] omega = {{{2,0},{1,1}},{{1,-1},{3,0}}};
+      double[][][] psi = {{{(1.0/Math.sqrt(2)),0}},{{0,(1.0/Math.sqrt(2))}}};
+      MatrizCompleja omegac = new MatrizCompleja(omega);
+      MatrizCompleja psic = new MatrizCompleja(psi);
+      Complejo varianza = omegac.varianza(psic);
+      Assert.assertTrue(varianza.getParteReal() == 1.2500000000000002);
     }
     
-    @Test
     public void valorEsperado() throws LibreriaComplejosException{
-        double[][][] alpha = {{{2,0},{1,1}},{{1,-1},{3,0}}};
+        double[][][] omega = {{{2,0},{1,1}},{{1,-1},{3,0}}};
         double[][][] psi = {{{(1.0/Math.sqrt(2)),0}},{{0,(1.0/Math.sqrt(2))}}};
         double[][][] identidad = {{{1,0},{0,0}},{{0,0},{1,0}}};
-        MatrizCompleja alphac = new MatrizCompleja(alpha);
+        MatrizCompleja omegac = new MatrizCompleja(omega);
         MatrizCompleja psic = new MatrizCompleja(psi);
         MatrizCompleja identidadc = new MatrizCompleja(identidad);
         MatrizCompleja producto2 = new MatrizCompleja(psic.size(),psic.get(0).size());
         producto2.setMatriz(psic.getMatriz());
-        MatrizCompleja producto1 = alphac.multiplicacion(psic);
+        MatrizCompleja producto1 = omegac.multiplicacion(psic);
         Complejo valorEsperado = producto1.productoInterno(producto2);
         MatrizCompleja parte2  = identidadc.multiplicacionEscalar(valorEsperado);
         
-        MatrizCompleja delta = alphac.restar(parte2);
+        MatrizCompleja delta = omegac.restar(parte2);
         MatrizCompleja delta2 = delta.multiplicacion(delta);
         MatrizCompleja op1 = delta2.multiplicacion(psic);
         System.out.println(op1.productoInterno(psic));

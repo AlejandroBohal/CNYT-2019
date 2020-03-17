@@ -228,8 +228,55 @@ public class MatrizCompleja {
         double real = resultadoM.get(0).get(0).getParteReal(),img = resultadoM.get(0).get(0).getParteImaginaria();
         double resultado = Math.pow(Math.sqrt(Math.pow(real,2)+Math.pow(img,2)),2);
         return resultado;
-        
     }
+    public Complejo media(MatrizCompleja keth) throws LibreriaComplejosException{
+        if (keth.get(0).size() >1){
+           throw new LibreriaComplejosException(LibreriaComplejosException.VECTOR_KET2); 
+        }else{
+            MatrizCompleja omega = new MatrizCompleja(this.size(),this.get(0).size());
+            omega.setMatriz(this.getMatriz());
+            if (! omega.esHermitian()){
+                throw new LibreriaComplejosException(LibreriaComplejosException.DEBERIA_SER_HERMITIAN); 
+            }
+            MatrizCompleja operador1 = omega.multiplicacion(keth);
+            return operador1.productoInterno(keth);
+        }
+    }
+    public MatrizCompleja generarIdentidad(){
+        MatrizCompleja In  = new MatrizCompleja(this.size(),this.get(0).size());
+            for (int i=0; i<In.size(); i++){
+                In.get(i).get(i).setParteReal(1.0);
+                In.get(i).get(i).setParteImaginaria(0.0);
+            }
+        return In;
+    }
+    public MatrizCompleja delta(MatrizCompleja keth) throws LibreriaComplejosException{
+        if (keth.get(0).size() >1){
+           throw new LibreriaComplejosException(LibreriaComplejosException.VECTOR_KET2); 
+        }else{
+            MatrizCompleja omega = new MatrizCompleja(this.size(),this.get(0).size());
+            omega.setMatriz(this.getMatriz());
+            MatrizCompleja In = this.generarIdentidad();
+            Complejo media = omega.media(keth);
+            MatrizCompleja operador2 = In.multiplicacionEscalar(media);
+            return omega.restar(operador2);
+        }
+    }
+    public Complejo varianza(MatrizCompleja keth) throws LibreriaComplejosException{
+        if (keth.get(0).size() >1){
+           throw new LibreriaComplejosException(LibreriaComplejosException.VECTOR_KET2); 
+        }else{
+            MatrizCompleja omega = new MatrizCompleja(this.size(),this.get(0).size());
+            omega.setMatriz(this.getMatriz());
+            if (! omega.esHermitian()){
+                throw new LibreriaComplejosException(LibreriaComplejosException.DEBERIA_SER_HERMITIAN); 
+            }
+            MatrizCompleja delta = omega.delta(keth);
+            MatrizCompleja delta2 = delta.multiplicacion(delta);
+            return delta2.media(keth);
+        }
+    }
+    
     public List<VectorComplejo> getMatriz() {
         return matriz;
     }
