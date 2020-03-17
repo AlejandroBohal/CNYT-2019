@@ -202,7 +202,34 @@ public class MatrizCompleja {
             return Math.pow(Math.sqrt(moduloPosicion)/Math.sqrt(sumatoriaModulos),2);
         }
     }
-    
+    public MatrizCompleja genVectorProbabilidad() throws LibreriaComplejosException{
+        MatrizCompleja vector = new MatrizCompleja(this.size(),this.get(0).size());
+        for (int i=0; i<this.size(); i++){
+                vector.get(i).get(0).setParteReal(this.probabilidad(i));
+                vector.get(i).get(0).setParteImaginaria(0.0);
+        }
+        return vector;
+    }
+    public MatrizCompleja amplitudTransicion(MatrizCompleja keth) throws LibreriaComplejosException{
+        if(this.get(0).size() > 1 || keth.get(0).size() >1){
+            throw new LibreriaComplejosException(LibreriaComplejosException.VECTOR_KET);
+        }else{
+            MatrizCompleja brah = new MatrizCompleja(keth.size(),keth.get(0).size());
+            brah.setMatriz(keth.transpuesta().conjugada().getMatriz());
+            MatrizCompleja amplitudDeTransicion = brah.multiplicacion(this);
+            return amplitudDeTransicion;
+        }
+        
+    }
+    public double probabilidadTransicion(MatrizCompleja keth2) throws LibreriaComplejosException{
+        MatrizCompleja keth1 = new MatrizCompleja(this.size(),this.get(0).size());
+        keth1.setMatriz(this.getMatriz());
+        MatrizCompleja resultadoM = keth1.amplitudTransicion(keth2);
+        double real = resultadoM.get(0).get(0).getParteReal(),img = resultadoM.get(0).get(0).getParteImaginaria();
+        double resultado = Math.pow(Math.sqrt(Math.pow(real,2)+Math.pow(img,2)),2);
+        return resultado;
+        
+    }
     public List<VectorComplejo> getMatriz() {
         return matriz;
     }
