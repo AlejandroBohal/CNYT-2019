@@ -479,27 +479,5 @@ public class ComplejosTest {
       Assert.assertTrue(varianza.getParteReal() == 1.2500000000000002);
     }
     
-    public void valorEsperado() throws LibreriaComplejosException{
-        double[][][] omega = {{{2,0},{1,1}},{{1,-1},{3,0}}};
-        double[][][] psi = {{{(1.0/Math.sqrt(2)),0}},{{0,(1.0/Math.sqrt(2))}}};
-        double[][][] identidad = {{{1,0},{0,0}},{{0,0},{1,0}}};
-        MatrizCompleja omegac = new MatrizCompleja(omega);
-        MatrizCompleja psic = new MatrizCompleja(psi);
-        MatrizCompleja identidadc = new MatrizCompleja(identidad);
-        MatrizCompleja producto2 = new MatrizCompleja(psic.size(),psic.get(0).size());
-        producto2.setMatriz(psic.getMatriz());
-        MatrizCompleja producto1 = omegac.multiplicacion(psic);
-        Complejo valorEsperado = producto1.productoInterno(producto2);
-        MatrizCompleja parte2  = identidadc.multiplicacionEscalar(valorEsperado);
-        
-        MatrizCompleja delta = omegac.restar(parte2);
-        MatrizCompleja delta2 = delta.multiplicacion(delta);
-        MatrizCompleja op1 = delta2.multiplicacion(psic);
-        System.out.println(op1.productoInterno(psic));
-    }
-    
-    
-    
-    
     
 }

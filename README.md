@@ -52,13 +52,44 @@ Entre todas las funcionalidades de la libreria podemos generar espacios vectoria
      ]
      */
      
-      
-
-### ¿Cómo usar?
+## ¿Cómo usar?
 
 Descargar el repositorio de 
 https://github.com/AlejandroBohal/CNYT-2019.git
 para verificar el correcto funcionamiento de las librerias es recomendable ejecutar las pruebas presentes en estos, se pueden ejecutar desde el IDE de preferencia o desde comandos MVN tales como
       
       mvntest:surefire
+Las pruebas implementadas reflejan las funcionalidades de la libreria, entre estas pruebas tenemos algunos retos de programación propuestos en el libro Quantum Computing for Computer Science.
+![]([https://raw.githubusercontent.com/AlejandroBohal/CNYT-2020/master/fotosPruebas/pruebas.png](https://raw.githubusercontent.com/AlejandroBohal/CNYT-2020/master/fotosPruebas/pruebas.png))
+También se hizo uso de la libreria para crear un simulador cuántico que cuenta con bastantes funcionalidades, para más información ir a:
+https://github.com/AlejandroBohal/SimulacionCuantica
+## Formación de espacios complejos.
+La librería cuenta con la implementación de una excepción propia que se encarga de que tanto los espacios vectoriales complejos como los operadores cuanticos se encuentren bien formados.
+
+![](https://raw.githubusercontent.com/AlejandroBohal/CNYT-2020/master/fotosPruebas/excepciones1.png)
+
+## Extensión de la librería de complejos a librería de computación básica cuántica.
+
+Partiendo de la base de la librería de complejos, se implementaron funcionalidades adicionales que dan solución a problemas de computación básica cuántica como simulación. Entre las funcionalidades implementadas tenemos:
+- Creación de vectores ket y matrices de estado,
+- Probabilidad de estado de una posición particular.
+- Amplitud de transición de un vector ket a otro,
+- Probabilidad de transición de un estado a otro.
+- Cálculo de media, delta y varianza de un observable con respecto a un ket
+
+Estas funcionalidades fueron probadas para un mayor entendimiento del uso de la libreria.
+
+![](https://raw.githubusercontent.com/AlejandroBohal/CNYT-2020/master/fotosPruebas/prueba4.png)
+
+![](https://raw.githubusercontent.com/AlejandroBohal/CNYT-2020/master/fotosPruebas/prueba5.png)
+
+![](https://raw.githubusercontent.com/AlejandroBohal/CNYT-2020/master/fotosPruebas/prueba6.png)
+![](https://raw.githubusercontent.com/AlejandroBohal/CNYT-2020/master/fotosPruebas/prueba7.png)
+![](https://raw.githubusercontent.com/AlejandroBohal/CNYT-2020/master/fotosPruebas/prueba8.png)
+
+![](https://raw.githubusercontent.com/AlejandroBohal/CNYT-2020/master/fotosPruebas/prueba9.png)
+
+![](https://raw.githubusercontent.com/AlejandroBohal/CNYT-2020/master/fotosPruebas/prueba11.png)
+
+
 
