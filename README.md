@@ -1,4 +1,4 @@
-# Libreria de numeros complejos 
+# Libreria de numeros complejos :rocket:
 
 ### Descripción 
 La libreria de complejos es una herramienta muy útil para la operación entre números complejos, los números complejos son la base de la computación cuántica y de muchas otras ramas de lo cuántico, en esta librería encontraras una utilidad para realizar operaciones básicas de la introducción a la computación cuantica.
